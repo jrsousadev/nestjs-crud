@@ -5,25 +5,34 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
 
+interface IFindOne {
+  id?: string;
+  email?: string;
+}
+
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  create(createUserDto: CreateUserDto) {
-    const user = new this.userModel(createUserDto);
+  async create(createUserDto: CreateUserDto) {
+    const user = await new this.userModel(createUserDto);
     return user.save();
   }
 
-  findAll() {
-    return this.userModel.find();
+  async findAll() {
+    return await this.userModel.find();
   }
 
-  findOne(id: string) {
-    return this.userModel.findById(id);
+  async findOne({ email, id }: IFindOne) {
+    if (email) {
+      return await this.userModel.findOne({ email });
+    }
+
+    return await this.userModel.findById(id);
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userModel.findByIdAndUpdate(
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.userModel.findByIdAndUpdate(
       {
         _id: id,
       },
@@ -36,8 +45,8 @@ export class UsersService {
     );
   }
 
-  remove(id: string) {
-    return this.userModel
+  async remove(id: string) {
+    return await this.userModel
       .deleteOne({
         _id: id,
       })
