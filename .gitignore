@@ -1,6 +1,9 @@
 # compiled output
 /dist
 /node_modules
+_cacache
+_logs
+_update-notifier-last-checked
 
 # Logs
 logs
