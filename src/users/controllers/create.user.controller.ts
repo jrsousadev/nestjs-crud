@@ -1,4 +1,11 @@
-import { Body, Controller, HttpStatus, NotFoundException, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpStatus,
+  NotFoundException,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UsersService } from '../users.service';
 
@@ -8,12 +15,12 @@ export class CreateUserController {
 
   @Post()
   async execute(@Res() res, @Body() data: CreateUserDto) {
-      const userExist = await this.usersService.findOne({ email: data.email });
+    const userExist = await this.usersService.findOne({ email: data.email });
 
-      if (userExist) throw new NotFoundException('User is exist');
+    if (userExist) throw new NotFoundException('User is exist');
 
-      const user = await this.usersService.create(data);
+    const user = await this.usersService.create(data);
 
-      return res.status(HttpStatus.CREATED).json(user);
+    return res.status(HttpStatus.CREATED).json(user);
   }
 }

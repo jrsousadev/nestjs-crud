@@ -13,11 +13,11 @@ import { DeleteUserController } from './controllers/delete.user.controller';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   controllers: [
-    CreateUserController, 
+    CreateUserController,
     FindOneUserController,
     FindUserController,
     UpdateUserController,
-    DeleteUserController
+    DeleteUserController,
   ],
   providers: [UsersService],
 })

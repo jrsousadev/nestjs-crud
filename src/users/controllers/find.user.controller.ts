@@ -1,4 +1,10 @@
-import { Controller, Get, HttpStatus, NotFoundException, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  NotFoundException,
+  Res,
+} from '@nestjs/common';
 import { UsersService } from '../users.service';
 
 @Controller('users')
@@ -7,8 +13,8 @@ export class FindUserController {
 
   @Get()
   async execute(@Res() res) {
-      const users = await this.usersService.findAll();
+    const users = await this.usersService.findAll();
 
-      return res.status(HttpStatus.OK).json(users);
+    return res.status(HttpStatus.OK).json(users);
   }
 }
