@@ -15,8 +15,8 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await new this.userModel(createUserDto);
-    return user.save();
+    const user = new this.userModel(createUserDto);
+    return await user.save();
   }
 
   async findAll() {
