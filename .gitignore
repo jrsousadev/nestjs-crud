@@ -4,6 +4,7 @@
 _cacache
 _logs
 _update-notifier-last-checked
+.env
 
 # Logs
 logs
